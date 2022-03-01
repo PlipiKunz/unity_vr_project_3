@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CameraManipulator : MonoBehaviour
 {
-    CharacterController cc;
-
 
     public float max_speed = 20.0f;
     public float acceleration = 2.0f;
@@ -22,7 +20,6 @@ public class CameraManipulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cc = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -32,10 +29,10 @@ public class CameraManipulator : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            cc.transform.position = new Vector3(48, 1, 0);
+            transform.position = new Vector3(48, 1, 0);
         }
         else if (Input.GetKey(KeyCode.Alpha2)) {
-            cc.transform.position = new Vector3(-6, 1, 0);
+            transform.position = new Vector3(-6, 1, 0);
         }
         else {
             //rotation updates
@@ -80,16 +77,15 @@ public class CameraManipulator : MonoBehaviour
                 }
 
                 movement = movement * (speed * Time.deltaTime);
-                movement = Quaternion.Euler(0, yaw, 0) * movement;
-                cc.Move(movement);
+                transform.Translate(movement);
             }
 
-            //gravity
-            {
-                curVertialSpeed = curVertialSpeed - 10.0f * Time.deltaTime;
-                Vector3 fall = new Vector3(0, curVertialSpeed * Time.deltaTime, 0);
-                cc.Move(fall);
-            }
+            // //gravity
+            // {
+            //     curVertialSpeed = curVertialSpeed - 10.0f * Time.deltaTime;
+            //     Vector3 fall = new Vector3(0, curVertialSpeed * Time.deltaTime, 0);
+            //     cc.Move(fall);
+            // }
         }
 
     }
